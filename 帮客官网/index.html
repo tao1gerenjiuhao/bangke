@@ -1,62 +1,600 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<title>fullPage</title>
-<link rel="stylesheet" href="css/jquery.fullPage.css">
-<style>
-.section { text-align: center; font: 50px "Microsoft Yahei"; color:#ffffff}
-</style>
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/jquery-ui-1.10.3.min.js"></script>
-<script src="js/jquery.fullPage.min.js"></script>
-<script>
-$(document).ready(function() {
-	$.fn.fullpage({
-		slidesColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#f90', '#4BBFC3'],
-		anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
-		navigation: true
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>帮客</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery.fullPage.css" rel="stylesheet">
+
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<script src="js/jquery-ui-1.10.3.min.js"></script>
+	<script src="js/jquery.fullPage.min.js"></script>
+    <style>
+        /* Reset CSS */
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
+        form,fieldset,input,textarea,p,blockquote,th,td {
+            padding: 0;
+            margin: 0;
+        }
+        a{
+            text-decoration:none;
+        }
+        table {
+            border-spacing: 0;
+        }
+        fieldset,img {
+            border: 0;
+        }
+        address,caption,cite,code,dfn,em,strong,th,var {
+            font-weight: normal;
+            font-style: normal;
+        }
+        strong{
+            font-weight: bold;
+        }
+        ol,ul {
+            list-style: none;
+            margin:0;
+            padding:0;
+        }
+        caption,th {
+            text-align: left;
+
+        }
+        h1,h2,h3,h4,h5,h6 {
+            font-weight: normal;
+            font-size: 100%;
+            margin:0;
+            padding:0;
+            color:#444;
+        }
+        q:before,q:after {
+            content:'';
+        }
+        abbr,acronym { border: 0;
+        }
+
+
+        /* Custom CSS */
+        body {
+            font: 16px/1.6 "Microsoft Yahei",Heiti,sans-serif;
+            font-family: 'Microsoft Yahei', Heiti, sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: normal;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1{
+            font-size: 6em;
+        }
+        p{
+            font-size: 2em;
+        }
+        .content{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+
+
+        /* 修正 */
+        .table {
+            margin-bottom: 0;
+        }
+
+        /* 导航条 */
+        .naviga {
+            height: 82px;
+            background-image: url("img/Tbg-caidanlan.png");
+            background-size: cover;
+        }
+
+        .naviga .logo {
+            margin-top: 10px;
+            float: left;
+        }
+
+        #hd {
+            color: #ffffff;
+            line-height: 82px;
+        }
+
+        #hd .nav-title {
+            float: right;
+            position: relative;
+        }
+        ul {
+            list-style: none;
+            display: block;
+        }
+
+        #hd .nav-title li {
+            display: inline-block;
+            font: 18px "Microsoft Yahei";
+        }
+
+        #hd a {
+            color: #ffffff;
+        }
+
+        /*#hd .nav-title a:before {
+            border: 1px solid #FFF;
+            color: #FFF;
+            content: '';
+            display: block;
+            float: right;
+            height: 8px;
+            margin-top: 37px;
+            vertical-align: middle;
+        }
+
+        #hd .nav-title a:before:last-child {
+
+        }*/
+
+        #hd a:visited {
+            text-decoration: none;
+        }
+        #hd a:hover {
+            text-decoration: none;
+        }
+        #hd a:active {
+            text-decoration: none;
+        }
+
+        /* 层页 */
+        .section {
+            text-align: center;
+            font: 24px "Microsoft Yahei";
+            color:#ffffff
+        }
+
+        /* 第一页 */
+        .section1 {
+            background-image: url("img/1bg-shoupingbeijing.png");
+            background-size: cover;
+        }
+
+        .kouhao {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+        .yingwen {
+            font: 10px "Microsoft Yahei";
+        }
+
+        .android {
+            background-image: url("img/Tbt-anzuoduan.png");
+            width: 204px;
+            height: 54px;
+            margin: 46px auto auto auto;
+            padding-top: 10px;
+        }
+
+        .android a {
+            text-decoration: none;
+            font: 20px "Microsoft Yahei";
+        }
+
+        /* 第二页 */
+        .section2{
+            background-image: url("img/2bg-erpingbeijing.png");
+            background-size: cover;
+        }
+
+        .rongqi {
+            width: 972px;
+            height: 308px;
+            margin: 0 auto 0 auto;
+        }
+
+        .help {
+            background-image: url("img/2im-help.png");
+            width: 819px;
+            height: 191px;
+            margin-top: 80px;
+            position: relative;
+            left: 105px;
+        }
+
+        .help1 {
+            background-image: url("img/2im-lvsekuai.png");
+            width: 800px;
+            height: 191px;
+            margin-left: 0;
+        }
+
+
+        .help2 {
+            background-image: url("img/2im-huangsekuai.png");
+            width: 800px;
+            height: 191px;
+            margin-left: 0;
+        }
+
+        .help3 {
+            background-image: url("img/2im-lansekuai.png");
+            width: 800px;
+            height: 191px;
+            margin-left: 0;
+        }
+        .help4 {
+            background-image: url("img/2im-qianlansekuai.png");
+            width: 800px;
+            height: 191px;
+            margin-left: 0;
+        }
+
+        .erzhuangshi {
+            background-image: url("img/2im-zhuangshi.png");
+            width: 972px;
+            height: 308px;
+
+            position: relative;
+            top: -50px;
+            left: -105px;
+        }
+
+        .wenzi {
+            margin-top: 10px;
+        }
+
+        .neirong {
+            margin-top: 30px;
+            font: 15px "Microsoft Yahei";
+            line-height: 25px;
+        }
+
+        /* 第三页 */
+        .section3{
+            background-image: url("img/3bg-sanpingbeijing.png");
+            background-size: cover;
+        }
+
+
+        .xiaoren {
+            width: 410px;
+            height: 200px;
+            margin: 150px auto auto auto;
+        }
+
+        .xu {
+            background-image: url("img/3im-xuqiuzhe.png");
+            width: 129px;
+            height: 197px;
+            float: left;
+        }
+
+        .fu {
+            background-image: url("img/3im-fuwushang.png");
+            width: 128px;
+            height: 195px;
+            float: left;
+            margin-left: 150px;
+
+        }
+
+        .shenfen {
+            margin-top: 50px;
+        }
+
+        /* 第四页 */
+        .section4{
+            background-image: url("img/4bg-sipingbeijing.png");
+            background-size: cover;
+        }
+
+        .ditu {
+            background-image: url("img/4im-map.png");
+            width: 844px;
+            height: 261px;
+            margin: 80px auto auto auto;
+        }
+
+        .yonghu {
+            position: relative;
+            width: 134px;
+            top: -80px;
+            left: 360px;
+        }
+
+        .yonghu1 {
+            position: relative;
+            width: 30px;
+            top: -10px;
+            left: 325px;
+        }
+        .yonghu2 {
+            position: relative;
+            width: 30px;
+            top: -25px;
+            left: 550px;
+        }
+        .yonghu3 {
+            position: relative;
+            width: 40px;
+            top: -175px;
+            left: 145px;
+        }
+        .yonghu4 {
+            position: relative;
+            width: 50px;
+            top: -180px;
+            left: 210px;
+        }
+        .yonghu5 {
+            position: relative;
+            width: 50px;
+            top: -230px;
+            left: 620px;
+        }
+
+        .dili {
+            margin-top: 40px;
+        }
+
+        .kauijie {
+            margin-top: 40px;
+            font: 15px "Microsoft Yahei";
+            line-height: 25px;
+            margin-bottom: 30px;
+        }
+
+        /* 第五页 */
+        .section5{
+            background-image: url("img/5bg-wupingbeijing.png");
+            background-size: cover;
+        }
+
+        .dunpai {
+            background-image: url("img/5im-dunpai.png");
+            width: 201px;
+            height: 289px;
+            margin: 0px auto auto auto;
+        }
+        
+        .jingrong {
+            background-image: url("img/5im-qianbifuhao.png");
+            width: 107px;
+            height: 105px;
+            position: relative;
+            top: 80px;
+            left: 66px;
+        }
+        
+        .huanrao {
+            background-image: url("img/5im-yuanquan.png");
+            width: 278px;
+            height: 223px;
+            position: relative;
+            top: -95px;
+            left: -35px;
+        }
+
+
+        .anquan {
+            margin-top: 40px;
+            font: 15px "Microsoft Yahei";
+            line-height: 25px;
+        }
+
+        .footer {
+            background-color: #343b40;
+            height: 76px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .foot-text {
+            font: 10px "Microsoft Yahei";
+            color: #53595d;
+            padding-top: 25px;
+
+        }
+
+        /* Test CSS*/
+        .test {
+            border: 1px solid red;
+        }
+        .test1 {
+            border: 1px solid black;
+        }
+
+        .test2 {
+            border: 1px solid green;
+        }
+        .test3 {
+            border: 1px solid yellow;
+        }
+
+    </style>
+
+	<script>
+	$(document).ready(function() {
+		$.fn.fullpage({
+			slidesColor: ['#1bbc9b', '', '#7BAABE', '#f90', '#4BBFC3'],
+			anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
+			navigation: true
+		});
 	});
-});
-</script>
+	</script>
 </head>
 
 <body>
+    <div class="navbar navbar-fixed-top naviga" id="hd">
+        <div class="container">
+            <div class="">
+                <img src="img/Tim-logo.png" class="logo"/>
 
-<div class="section">
-	<h3>第一页</h3>
+            </div>
+            <ul class="nav-title">
+                <li><a href="#">&nbsp;&nbsp;首&nbsp;&nbsp;页&nbsp;&nbsp;</a></li>
+                <li style="font-size: xx-small">|</li>
+                <li><a href="#">&nbsp;&nbsp;帮客动态&nbsp;&nbsp;</a></li>
+                <li style="font-size: xx-small">|</li>
+                <li><a href="#">&nbsp;&nbsp;关于我们&nbsp;&nbsp;</a></li>
+                <li style="font-size: xx-small">|</li>
+                <li><a href="#">&nbsp;&nbsp;下&nbsp;&nbsp;载&nbsp;</a><img src="img/Tbt-youjiantou.png"/>&nbsp;&nbsp;&nbsp;</li>
 
-</div>
-<div class="section">
-	<h3>第二页</h3>
+                <a href="#"><img style="margin-bottom: 6px" src="img/Tbt-denglu.png"/></a>
+                <a href="#"><img style="margin-bottom: 6px" src="img/Tbt-zhuce.png"/></a>
+            </ul>
+        </div>
+    </div>
 
-</div>
-<div class="section">
-	<h3>第三页</h3>
+    <!-- 第一页 -->
+    <div class="section section1">
+        <!-- 口号 -->
+        <div class="kouhao">
+            <img src="img/1im-dabiaoyu.png/">
+        </div>
+        <div>
+            <img src="img/1im-zhuangshitubiao.png"/><br/>
+            <p class="yingwen">BANGKE AT ANY TIME AS LIFE</p>
+            帮客
+            <div class="neirong">
+                是一个让帮助你获取即时、个性化、可预约上门到户的软件<br/>
+                让成百上千的‘手艺人’使用帮客，来销售他们的‘手艺’，让手艺和技能像商品一样在互联网流通
+            </div>
+        </div>
+        <div class="android">
+            <a href="#">安卓版</a>&nbsp;&nbsp;&nbsp;<a href="#">IOS版</a>
+        </div>
+        <img style="margin-top: 55px;" src="img/Tbt-xiahuajiantou.png"/>
+    </div>
 
-</div>
-<div class="section">
-	<h3>第四页</h3>
+    <!-- 第二页 -->
+    <div class="section section2">
+        <!--help-->
+        <div class="container">
+            <div class="row">
+                <div class="rongqi">
+                    <div class="help">
+                        <div class="help1">
+                            <div class="help2">
+                                <div class="help3">
+                                    <div class="help4">
+                                        <div class="erzhuangshi">
 
-</div>
-<div class="section">
-	<h3>第五页</h3>
+                                        </div>
 
-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- 需求发布文字部分 -->
+        <div class="wenzi">
+            需求主动发布
+            <div class="neirong">
+               由需求发布者自由定制需求的内容，个性化选择自己的需求。<br/>
+                让被动地寻找合适的帮忙成为过去。
+            </div>
+            <img style="margin-top: 15px;" src="img/Tbt-xiahuajiantou.png"/>
+        </div>
+    </div>
 
+    <!-- 第三页 -->
+    <div class="section section3">
+            <div class="xiaoren">
+                <div class="xu">
+                    <img style="margin-top: 45px" src="img/3im-xu.png" />
+                </div>
+                <div class="fu">
+                    <img style="margin-top: 45px" src="img/3im-fu.png" />
+                </div>
+            </div>
 
+        <!-- 身份互换 -->
+        <div class="shenfen">
+            身份互换
+            <div class="neirong">
+                需求者可以摇身一变成为服务者。<br/>
+                可以享受快速、个性化的服务的同时，也可以顺手挣点小钱。
+            </div>
+        </div>
+        <img style="margin-top: 25px;" src="img/Tbt-xiahuajiantou.png"/>
+    </div>
 
+    <!-- 第四页 -->
+    <div class="section section4">
+        <div class="ditu">
+            <div class="yonghu1">
+                <img src="img/4im-yonghutubiao.png" style="width: 30px;">
+            </div>
+            <div class="yonghu2">
+                <img src="img/4im-yonghutubiao.png" style="width: 30px;">
+            </div>
+            <div class="yonghu">
+                <img src="img/4im-yonghuxiaoren.png" >
+            </div>
+            <div class="yonghu3">
+                <img src="img/4im-yonghutubiao.png" style="width: 40px;">
+            </div>
+            <div class="yonghu4">
+                <img src="img/4im-yonghutubiao.png">
+            </div>
+            <div class="yonghu5">
+                <img src="img/4im-yonghutubiao.png">
+            </div>
+        </div>
+        <!-- 地理位置 -->
+        <div class="dili">
+            根据地理位置进行筛选
+            <div class="kauijie">
+                让身边最近的人来帮助你，快速建立服务交易，快捷可靠。
+            </div>
+        </div>
+        <img style="margin-top: 34px;" src="img/Tbt-xiahuajiantou.png"/>
+    </div>
 
+    <!-- 第五页 -->
+    <div class="section section5">
+        <div class="dunpai">
+            <div class="jingrong">
 
+            </div>
+            <div class="huanrao">
+            </div>
+        </div>
+        <!-- 担保交易 -->
+        <div class="danbao">
+            资金担保交易&nbsp;&nbsp;信用评价体系
+            <div class="anquan">
+                让每一次的服务都是满意后再付款，保证服务质量和服务水平。
+                跟踪到个人的信用评价，可以选择最合适的人为你服务。
+            </div>
+        </div>
 
+        <div class="android">
+            <a href="#">安卓版</a>&nbsp;&nbsp;&nbsp;<a href="#">IOS版</a>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img src="img/5im-footerlogo.png"/>
+                    </div>
+                    <div class="col-lg-offset-1 col-lg-6 foot-text">
+                        Copyright(C)2000-2011 Enorth.con.cn, Tianjin ENORTH NETNEWS Co,LTD All rights reserved
+                        <div style="float: right">本网站由帮客版权所有&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
-
-
-<!--
-<a href="http://www.dowebok.com/" style="display: none;">dowebok</a>
-<a href="http://www.dowebok.com/77.html" style="display: none;">jQuery全屏滚动插件fullPage.js</a>
--->
 
 </body>
 </html>
